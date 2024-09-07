@@ -7,28 +7,38 @@ class GestionInventarioTiendaTest {
     @BeforeAll
     static void setUpBeforeClass() {
         Object[][] productos = new Object[10][3];
-        GestionInventarioTienda.ingresarNuevoProducto(productos, "Arroz", 10);
-        GestionInventarioTienda.ingresarNuevoProducto(productos, "Zapallo", 20);
-        GestionInventarioTienda.ingresarNuevoProducto(productos, "Manzanas", 200);
-        GestionInventarioTienda.ingresarNuevoProducto(productos, "Platino", 300);
-        GestionInventarioTienda.ingresarNuevoProducto(productos, "Televisores", 4);
-        GestionInventarioTienda.ingresarNuevoProducto(productos, "Papel", 20);
-        GestionInventarioTienda.ingresarNuevoProducto(productos, "Camas", 5);
-        GestionInventarioTienda.ingresarNuevoProducto(productos, "Mesas", 40);
-        GestionInventarioTienda.ingresarNuevoProducto(productos, "Sillas", 90);
+        GestionInventarioTienda.agregarProductos(productos,-1, "Arroz", 10);
+        GestionInventarioTienda.agregarProductos(productos,-1, "Zapallo", 20);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Manzanas", 200);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Platino", 300);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Televisores", 4);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Papel", 20);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Camas", 5);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Mesas", 40);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Sillas", 90);
     }
 
     @BeforeEach
     void setUp() {
-        GestionInventarioTienda.ingresarNuevoProducto(productos, "Arroz", 10);
-        GestionInventarioTienda.ingresarNuevoProducto(productos, "Zapallo", 20);
-        GestionInventarioTienda.ingresarNuevoProducto(productos, "Manzanas", 200);
-        GestionInventarioTienda.ingresarNuevoProducto(productos, "Platino", 300);
-        GestionInventarioTienda.ingresarNuevoProducto(productos, "Televisores", 4);
-        GestionInventarioTienda.ingresarNuevoProducto(productos, "Papel", 20);
-        GestionInventarioTienda.ingresarNuevoProducto(productos, "Camas", 5);
-        GestionInventarioTienda.ingresarNuevoProducto(productos, "Mesas", 40);
-        GestionInventarioTienda.ingresarNuevoProducto(productos, "Sillas", 90);
+        GestionInventarioTienda.agregarProductos(productos,-1, "Arroz", 10);
+        GestionInventarioTienda.agregarProductos(productos,-1, "Zapallo", 20);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Manzanas", 200);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Platino", 300);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Televisores", 4);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Papel", 20);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Camas", 5);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Mesas", 40);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Sillas", 90);
+    }
+
+    @Test
+    void agregarProductos1(){
+        assert GestionInventarioTienda.agregarProductos(productos, -1, "Servilletas", 100) == "Producto agregado";
+    }
+
+    @Test
+    void agregarProductos2(){
+        assert GestionInventarioTienda.agregarProductos(productos, 3, "", 100) == "Aumento de stock exitoso";
     }
 
     @Test
@@ -40,6 +50,17 @@ class GestionInventarioTiendaTest {
     void buscadorFilaTest2(){
         assert GestionInventarioTienda.buscarFilaProducto(productos, 10) == -1;
     }
+
+    @Test
+    void existeProductoTest(){
+        assert !GestionInventarioTienda.existeProducto(productos, 11);
+    }
+
+    @Test
+    void existeProductoTest2(){
+        assert GestionInventarioTienda.existeProducto(productos, 2);
+    }
+
 
 
 }

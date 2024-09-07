@@ -1,22 +1,24 @@
 public class GestionInventarioTienda {
 
-    public static void ingresarNuevoProducto(Object[][] productos, String nombre, int cantidad){
-        for (int fila = 0; fila < productos.length; fila++){
-            if (productos[fila][0] == null){
-                productos[fila][0] = fila+1;
-                productos[fila][1] = nombre;
-                productos[fila][2] = cantidad;
-                return;
+
+
+    public static String agregarProductos(Object[][] productos, int idProducto, String nombreProducto, int cantidad){
+        if (nombreProducto == ""){
+            int fila = buscarFilaProducto(productos, idProducto);
+            int cantidadActual = (int) productos[fila][2];
+            productos[fila][2] = sumarNumeros(cantidadActual, cantidad);
+            return "Aumento de stock exitoso";
+        } else if (idProducto ==  -1){
+            for (int fila = 0 ; fila < productos.length ; fila++){
+                if (productos[fila][0] == null){
+                    productos[fila][0] = fila+1;
+                    productos[fila][1] = nombreProducto;
+                    productos[fila][2] = cantidad;
+                    return "Producto agregado";
+                }
             }
         }
-        System.out.println("Inventario lleno");
-    }
-
-    public static void agregarProductos(Object[][] productos, int idProducto, int cantidad){
-        int fila = buscarFilaProducto(productos, idProducto);
-        int cantidadActual = (int) productos[fila][2];
-        productos[fila][2] = cantidad + cantidadActual;
-        System.out.println("Aumento de stock exitoso");
+        return "Error : No se pudieron agregar más productos ";
     }
 
     public static void restarProductos(Object[][] productos, int idProducto, int cantidad){
@@ -32,6 +34,8 @@ public class GestionInventarioTienda {
         }
     }
 
+
+
     public static int buscarFilaProducto(Object[][] productos, int idProducto){
         int filaDelProducto = -1;
         for (int fila = 0; fila < productos.length; fila++) {
@@ -43,7 +47,6 @@ public class GestionInventarioTienda {
             } catch (java.lang.NullPointerException e) {
                 filaDelProducto = -1;
             }
-
         }
         return filaDelProducto;
     }
