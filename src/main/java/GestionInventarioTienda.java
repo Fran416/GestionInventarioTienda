@@ -1,6 +1,7 @@
 public class GestionInventarioTienda {
 
 
+//Funciones que debian implementarse en el sistema
 
     public static String agregarProductos(Object[][] productos, int idProducto, String nombreProducto, int cantidad){
         if (nombreProducto == ""){
@@ -56,7 +57,7 @@ public class GestionInventarioTienda {
         }
     }
 
-
+//Funcion para simplificar la busqueda de un producto en la matriz inventario
 
     public static int buscarFilaProducto(Object[][] productos, int idProducto){
         int filaDelProducto = -1;
@@ -73,9 +74,13 @@ public class GestionInventarioTienda {
         return filaDelProducto;
     }
 
+//Funcion para evitar errores en las funciones principales
+
     public static boolean existeProducto(Object[][] productos, int idProducto){
         return buscarFilaProducto(productos, idProducto) != -1;
     }
+
+// Funciones para operaciones basicas
 
     public static int sumarNumeros(int numero1, int numero2){
         return numero1 + numero2;
