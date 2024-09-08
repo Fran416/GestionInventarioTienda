@@ -21,16 +21,20 @@ public class GestionInventarioTienda {
         return "Error : No se pudieron agregar más productos ";
     }
 
-    public static void restarProductos(Object[][] productos, int idProducto, int cantidad){
+    public static String restarProductos(Object[][] productos, int idProducto, int cantidad){
         int fila = buscarFilaProducto(productos, idProducto);
         int cantidadActual = (int) productos[fila][2];
         int resta = restarNumeros(cantidadActual, cantidad);
-        if (resta >= 0){
+        if (resta == 0){
+            productos[fila][0] = null;
+            productos[fila][1] = null;
+            productos[fila][2] = null;
+            return "Sin Stock restante, producto eliminado del inventario";
+        }  else if (resta >= 0){
             productos[fila][2] = resta;
-            System.out.print("Resta de stock exitoso, nueva cantidad: ");
-            System.out.println(resta);
+            return "Stock actualizado con exito";
         } else {
-            System.out.println("Error: No pueden haber productos en negativo");
+            return "Error: No pueden haber productos en negativo";
         }
     }
 

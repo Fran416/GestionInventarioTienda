@@ -61,6 +61,23 @@ class GestionInventarioTiendaTest {
         assert GestionInventarioTienda.existeProducto(productos, 2);
     }
 
+    @Test
+    void restarProductosTest1(){
+        assert GestionInventarioTienda.restarProductos(productos, 1, 10) == "Sin Stock restante, producto eliminado del inventario";
+    }
+
+
+    @Test
+    void restarProductosTest2(){
+        GestionInventarioTienda.restarProductos(productos, 1, 10);
+        assert  productos[0][0] == null;
+    }
+
+    @Test
+    void restarProductosTest3(){
+        GestionInventarioTienda.restarProductos(productos, 1, 5);
+        assert  (int) productos[0][2] == 5;
+    }
 
 
 }
