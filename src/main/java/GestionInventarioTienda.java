@@ -1,3 +1,6 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class GestionInventarioTienda {
 
 
@@ -55,6 +58,39 @@ public class GestionInventarioTienda {
                 System.out.println((int)productos[fila][2]);
             }
         }
+    }
+
+//Funciones para el funcionamiento del menu
+
+    public static void mostrarMenu(){
+        System.out.println("---------------------- Menu Principal ----------------------");
+        System.out.println("1. Agregar Producto");
+        System.out.println("2. Restar Stock de un Producto");
+        System.out.println("3. Consultar Stock de un Producto");
+        System.out.println("4. Listar Productos");
+    }
+
+    public static int comprobarNumeroEntero(){
+        try {
+            int seleccionUsuario = leerNumeroTeclado();
+            return seleccionUsuario;
+        } catch (InputMismatchException e) {
+            return 0;
+        }
+    }
+
+    public static String leerTextoTeclado(){
+        Scanner sc = new Scanner(System.in);
+        String texto = sc.nextLine();
+        sc.close();
+        return texto;
+    }
+
+    public static int leerNumeroTeclado(){
+        Scanner sc = new Scanner(System.in);
+        int numero = sc.nextInt();
+        sc.close();
+        return numero;
     }
 
 //Funcion para simplificar la busqueda de un producto en la matriz inventario
