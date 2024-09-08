@@ -1,18 +1,24 @@
+import java.awt.*;
+import java.util.DoubleSummaryStatistics;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class GestionInventarioTienda {
+    public static void main(String[] args) {
+        Object[][] productos = new Object[10][3];
+        menu(productos);
+    }
 
 
 //Funciones que debian implementarse en el sistema
 
-    public static String agregarProductos(Object[][] productos, int idProducto, String nombreProducto, int cantidad){
-        if (nombreProducto == ""){
+    public static String agregarProductos(Object[][] productos, int idProducto, String nombreProducto, int cantidad, boolean existeProducto){
+        if (existeProducto){
             int fila = buscarFilaProducto(productos, idProducto);
             int cantidadActual = (int) productos[fila][2];
             productos[fila][2] = sumarNumeros(cantidadActual, cantidad);
             return "Aumento de stock exitoso";
-        } else if (idProducto ==  -1){
+        } else {
             for (int fila = 0 ; fila < productos.length ; fila++){
                 if (productos[fila][0] == null){
                     productos[fila][0] = fila+1;
@@ -22,7 +28,7 @@ public class GestionInventarioTienda {
                 }
             }
         }
-        return "Error : No se pudieron agregar más productos ";
+        return "Error";
     }
 
     public static String restarProductos(Object[][] productos, int idProducto, int cantidad){
@@ -62,12 +68,85 @@ public class GestionInventarioTienda {
 
 //Funciones para el funcionamiento del menu
 
+    public static void menu(Object[][] productos){
+        boolean noSalir = true;
+        while (noSalir){
+            mostrarMenu();
+            noSalir = accionesMenu(productos);
+        }
+    }
+
     public static void mostrarMenu(){
         System.out.println("---------------------- Menu Principal ----------------------");
         System.out.println("1. Agregar Producto");
         System.out.println("2. Restar Stock de un Producto");
         System.out.println("3. Consultar Stock de un Producto");
         System.out.println("4. Listar Productos");
+        System.out.println("5. Salir");
+        System.out.print("Su seleccion: ");
+    }
+
+    public static boolean accionesMenu(Object[][] productos){
+        return switch (comprobarNumeroEntero()) {
+            case 1 -> {
+                accionAgregarProducto(productos);
+                yield true;
+            }
+            case 2 -> {
+                accionRestarProducto(productos);
+                yield true;
+            }
+            case 3 -> {
+                accionConsultarDisponiblidad(productos);
+                yield true;
+            }
+            case 4 -> {
+                listarProductos(productos);
+                yield true;
+            }
+            case 5 -> false;
+            default -> {
+                System.out.println("Opcion no valida!");
+                yield true;
+            }
+        };
+    }
+
+    public static void accionRestarProducto(Object[][] productos){
+        System.out.print("Ingrese el ID del producto: ");
+        int idProducto = comprobarNumeroEntero();
+        if (existeProducto(productos, idProducto)){
+            System.out.print("Ingrese la cantidad que desea restar al stock del producto: ");
+            int cantidadRestar = comprobarNumeroEntero();
+            String message = restarProductos(productos, idProducto, cantidadRestar);
+            System.out.println(message);
+        } else {
+            System.out.println("Error : El producto no existe");
+        }
+    }
+
+    public static void accionAgregarProducto(Object[][] productos){
+        System.out.print("Introduzca el id del producto (en caso que sea uno nuevo ponga 0): ");
+        int idProducto = comprobarNumeroEntero();
+        boolean existeProducto = existeProducto(productos, idProducto);
+        System.out.print("Introduzca el nombre de su producto (en caso que no sea uno nuevo no es necesario ingresar un nombre): ");
+        String nombreProducto = leerTextoTeclado();
+        System.out.print("Ingrese la cantidad del producto que desea agregar: ");
+        int cantidadProducto = comprobarNumeroEntero();
+        String message = agregarProductos(productos, idProducto, nombreProducto, cantidadProducto, existeProducto);
+        System.out.println(message);
+    }
+
+    public static void accionConsultarDisponiblidad(Object[][] productos){
+        System.out.print("Ingrese el ID del producto: ");
+        int idProducto = comprobarNumeroEntero();
+        if (existeProducto(productos, idProducto)){
+            int cantidadProducto = consultarDisponibilidad(productos, idProducto);
+            System.out.print("En inventario: ");
+            System.out.println(cantidadProducto);
+        } else {
+            System.out.println("Error : El producto no existe");
+        }
     }
 
     public static int comprobarNumeroEntero(){
@@ -81,16 +160,12 @@ public class GestionInventarioTienda {
 
     public static String leerTextoTeclado(){
         Scanner sc = new Scanner(System.in);
-        String texto = sc.nextLine();
-        sc.close();
-        return texto;
+        return sc.nextLine();
     }
 
     public static int leerNumeroTeclado(){
         Scanner sc = new Scanner(System.in);
-        int numero = sc.nextInt();
-        sc.close();
-        return numero;
+        return sc.nextInt();
     }
 
 //Funcion para simplificar la busqueda de un producto en la matriz inventario
