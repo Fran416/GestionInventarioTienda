@@ -79,5 +79,13 @@ class GestionInventarioTiendaTest {
         assert  (int) productos[0][2] == 5;
     }
 
+    @Test
+    void consultarDisponibilidadTest1(){
+        assert GestionInventarioTienda.consultarDisponibilidad(productos, 5) == 4;
+    }
 
+    @Test
+    void consultarDisponibilidadTest2(){
+        assert GestionInventarioTienda.consultarDisponibilidad(productos, 8) == 40;
+    }
 }

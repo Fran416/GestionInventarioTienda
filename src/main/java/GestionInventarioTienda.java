@@ -38,6 +38,11 @@ public class GestionInventarioTienda {
         }
     }
 
+    public static int consultarDisponibilidad(Object[][] productos, int idProducto){
+        int fila = buscarFilaProducto(productos, idProducto);
+        return (int)productos[fila][2];
+    }
+
 
 
     public static int buscarFilaProducto(Object[][] productos, int idProducto){
