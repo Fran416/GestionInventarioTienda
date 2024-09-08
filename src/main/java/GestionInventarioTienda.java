@@ -43,6 +43,19 @@ public class GestionInventarioTienda {
         return (int)productos[fila][2];
     }
 
+    public static void listarProductos(Object[][] productos){
+        System.out.println(" ID | Nombre del producto | Stock disponible");
+        for (int fila = 0; fila < productos.length ; fila++){
+            if (productos[fila][0] != null){
+                System.out.print((int)productos[fila][0]);
+                System.out.print(" | ");
+                System.out.print((String)productos[fila][1]);
+                System.out.print(" | ");
+                System.out.println((int)productos[fila][2]);
+            }
+        }
+    }
+
 
 
     public static int buscarFilaProducto(Object[][] productos, int idProducto){
