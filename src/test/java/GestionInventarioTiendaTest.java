@@ -7,38 +7,38 @@ class GestionInventarioTiendaTest {
     @BeforeAll
     static void setUpBeforeClass() {
         Object[][] productos = new Object[10][3];
-        GestionInventarioTienda.agregarProductos(productos,-1, "Arroz", 10);
-        GestionInventarioTienda.agregarProductos(productos,-1, "Zapallo", 20);
-        GestionInventarioTienda.agregarProductos(productos, -1,"Manzanas", 200);
-        GestionInventarioTienda.agregarProductos(productos, -1,"Platino", 300);
-        GestionInventarioTienda.agregarProductos(productos, -1,"Televisores", 4);
-        GestionInventarioTienda.agregarProductos(productos, -1,"Papel", 20);
-        GestionInventarioTienda.agregarProductos(productos, -1,"Camas", 5);
-        GestionInventarioTienda.agregarProductos(productos, -1,"Mesas", 40);
-        GestionInventarioTienda.agregarProductos(productos, -1,"Sillas", 90);
+        GestionInventarioTienda.agregarProductos(productos,-1, "Arroz", 10, false);
+        GestionInventarioTienda.agregarProductos(productos,-1, "Zapallo", 20, false);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Manzanas", 200, false);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Platino", 300, false);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Televisores", 4, false);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Papel", 20,false);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Camas", 5,false);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Mesas", 40,false);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Sillas", 90,false);
     }
 
     @BeforeEach
     void setUp() {
-        GestionInventarioTienda.agregarProductos(productos,-1, "Arroz", 10);
-        GestionInventarioTienda.agregarProductos(productos,-1, "Zapallo", 20);
-        GestionInventarioTienda.agregarProductos(productos, -1,"Manzanas", 200);
-        GestionInventarioTienda.agregarProductos(productos, -1,"Platino", 300);
-        GestionInventarioTienda.agregarProductos(productos, -1,"Televisores", 4);
-        GestionInventarioTienda.agregarProductos(productos, -1,"Papel", 20);
-        GestionInventarioTienda.agregarProductos(productos, -1,"Camas", 5);
-        GestionInventarioTienda.agregarProductos(productos, -1,"Mesas", 40);
-        GestionInventarioTienda.agregarProductos(productos, -1,"Sillas", 90);
+        GestionInventarioTienda.agregarProductos(productos,-1, "Arroz", 10, false);
+        GestionInventarioTienda.agregarProductos(productos,-1, "Zapallo", 20, false);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Manzanas", 200, false);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Platino", 300, false);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Televisores", 4, false);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Papel", 20,false);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Camas", 5,false);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Mesas", 40,false);
+        GestionInventarioTienda.agregarProductos(productos, -1,"Sillas", 90,false);
     }
 
     @Test
     void agregarProductos1(){
-        assert GestionInventarioTienda.agregarProductos(productos, -1, "Servilletas", 100) == "Producto agregado";
+        assert GestionInventarioTienda.agregarProductos(productos, -1, "Servilletas", 100, false) == "Producto agregado";
     }
 
     @Test
     void agregarProductos2(){
-        assert GestionInventarioTienda.agregarProductos(productos, 3, "", 100) == "Aumento de stock exitoso";
+        assert GestionInventarioTienda.agregarProductos(productos, 3, "", 100, true) == "Aumento de stock exitoso";
     }
 
     @Test
