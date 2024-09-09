@@ -112,6 +112,8 @@ public class GestionInventarioTienda {
         };
     }
 
+//Funciones para solicitar informacion y darles los datos necesarios a las funciones que debian implementarse
+
     public static void accionRestarProducto(Object[][] productos){
         System.out.print("Ingrese el ID del producto: ");
         int idProducto = comprobarNumeroEntero();
